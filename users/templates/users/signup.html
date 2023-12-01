@@ -1,0 +1,22 @@
+{% extends 'baseIN.html' %} 
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="mx-auto">
+  <div class="form-group">
+    <div class="login">
+    <form action="" method="post">
+      {% csrf_token %} 
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-danger w-100 my-3">Utwórz konto</button>
+    </form>
+  </div>
+  </div>
+  {% comment %}  Already Registered {% endcomment %}
+  <div class="text-center w-100">
+    <p class="text-muted font-weight-bold">
+      Masz już konto?
+      <a href="{% url 'user:login' %}" class="text-primary ml-2">Zaloguj</a>
+    </p>
+  </div>
+</div>
+{% endblock body %}

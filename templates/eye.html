@@ -1,0 +1,90 @@
+{% extends 'baseIN.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="content text-center">
+
+    <div class="context-text">
+        <h2 class="last" style="color:rgb(0, 0, 0)">Urządzenie wykorzytane do badania</h2>
+        <div class="last">
+        <p style="color:rgb(61, 64, 62); max-width: 500px; margin: 0 auto; ">
+
+            Badanie dna oka wykonywane jest przy pomocy funduskamery, 
+            czyli urządzenia diagnostycznego wykorzystywanego powszechnie w okulistyce.
+        </p>
+        </div>
+        <div style="margin-bottom: 60px;"></div>
+
+        {% load static %}
+        <figure>
+        <img src="{% static 'funduskamera.jpg' %}" alt="Medical Image" width="400px" class="baner img-fluid">
+        <figcaption style="color:white; white-space: pre-wrap;">
+            Rys.1. Funduskamera model APS-BER. <a href=https://www.internationalopticalindustries.com/product/aps-ber-fundus-camera>
+                https://www.internationalopticalindustries.com/product/aps-ber-fundus-camera</a>
+            </figcaption>
+    </figure>
+
+    <div style="margin-bottom: 60px;"></div>
+
+        <h2 class="last" style="color:rgb(0, 0, 0)">Proces badania</h2>
+        <div class="last">
+        <p  style="color:rgb(61, 64, 62); max-width: 500px; margin: 0 auto;">
+            Przypatrzmy się zatem etapom badania. W pierwszej fazie generowane jest światło i 
+            rzutowane przez zestaw filtrów na okrągłe lustro. Lustro odbija światło, 
+            a następnie jest ono skupione przez szereg soczewek, gdzie ukształtowane 
+            w pierścień przechodzi dalej, aby móc odbić się od kolejnego lustra. 
+            Lustro to zawiera centralny otwór. Światło wychodzi dalej z aparatu przez 
+            obiektyw i przez rogówkę dociera do dna oka, którego zdjęcie ma zostać wykonane. <br>
+            Przy założeniu, że system oświetlenia został ustawiony poprawnie, powstały obraz 
+            dna oka opuszcza rogówkę przez nieoświetloną część pierścienia, czyli przez źrenicę. 
+            Światło trafia w centralny otwór pierścienia, a kolejno ponownie do obiektywu. Należy 
+            pamiętać o wyregulowaniu okularu przed przystąpieniem do badania, aby zapewnić należytą 
+            ostrość i tym samym efektywność badania. 
+        </p>
+        </div>
+
+        <div style="margin-bottom: 60px;"></div>
+
+        {% load static %}
+        <figure>
+        <img src="{% static 'eye1.png' %}" alt="Medical Image" width="400px" class="baner img-fluid">
+        <figcaption style="color:white; white-space: pre-wrap;">
+            •	Źródło: Opracowanie własne na podstawie  <a href= https://www.ncbi.nlm.nih.gov/books/NBK585111/#__NBK585111_dtls__>
+            https://www.ncbi.nlm.nih.gov/books/NBK585111/#__NBK585111_dtls__</a>,
+            31.07.2023. 
+            Rys.2. Schemat oświetlenia i obrazowania siatkówki oka przez źrenicę.
+        </figcaption>
+        </figure>
+
+        <div style="margin-bottom: 60px;"></div>
+
+        <div class="last">
+        <p style="color:rgb(61, 64, 62); max-width: 500px; margin: 0 auto;">
+            Poniżej przedstawiony został obraz wnętrza oka, gdzie zobrazowane jest przejście promieni
+            świetłnych, które oświetlają oko od wewnątrz celem zobrazowania jego dna.
+        </p>
+        </div>
+
+
+        <div style="margin-bottom: 60px;"></div>
+
+        {% load static %}
+        <figure>
+        <img src="{% static 'eye2.png' %}" alt="Medical Image" width="400px" class="last" 
+        style="background-color: rgba(236, 227, 227, 0.737)">
+        <figcaption style="color: white; white-space: pre-wrap;">
+            •	Źródło: Opracowanie własne na podstawie <a href=https://www.opsweb.org/page/fundusphotography>
+            https://www.opsweb.org/page/fundusphotography</a> 
+            Rys.3. Zobrazowanie przejścia światła oświetlającego dno oka. 
+        </figcaption>
+    </div>
+
+<div style="margin-bottom: 100px;"></div>
+</div>
+
+    {% endblock body %}

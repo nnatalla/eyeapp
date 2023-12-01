@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+
+<style>
+    #photoContainer.flex-column {
+        align-items: center;
+    }
+
+    #photoContainer.flex-column .col-lg-3,
+    #photoContainer.flex-column .col-md-4,
+    #photoContainer.flex-column .col-6 {
+        width: 100%;
+    }
+
+    #photoContainer.flex-column img {
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<div style="margin-bottom: 20px;"></div>
+<div class="text-center">
+    <p class="text-center fw-bold">Orygialne obrazy dna oka znajdujące się w bazie:</p>
+    <div class="btn-group mb-3" role="group" aria-label="Widok">
+        <button type="button" class="btn btn-secondary" onclick="changeView('grid')">Widok siatki</button>
+        <button type="button" class="btn btn-secondary" onclick="changeView('list')">Widok listy</button>
+    </div>
+    <div class="btn-group mb-3" role="group" aria-label="Widok">
+        <button type="button" class="btn btn-primary" onclick="changeSize('increase')">Powiększ</button>
+        <button type="button" class="btn btn-primary" onclick="changeSize('decrease')">Pomniejsz</button>
+        <button type="button" class="btn btn-info" onclick="resetSize()">Reset</button>
+    </div>
+</div>
+
+
+<div class="d-flex flex-wrap" id="photoContainer">
+    {% for photo in photos %}
+    <div class="col-lg-3 col-md-4 col-6 mb-4 text-center" style="position: relative">
+        <a href="{% url 'photo:basedetail' photo.id %}" class="d-block h-100">
+            <p class="text-center text-success fw-bold">ID: {{ photo.id }} | Nazwa: {{ photo.title }}</p>
+            <img src="{{photo.image.url}}" class="img-fluid rounded" alt="{{photo.title}}" style="width: 100%;" />
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<div style="margin-bottom: 100px;"></div>
+</div>
+
+
+
+<script>
+    var originalSizes = {};  
+
+    function storeOriginalSize(image) {
+        var id = image.parentElement.href; 
+        originalSizes[id] = image.clientWidth;
+    }
+
+    function changeSize(action) {
+        var photoContainer = document.getElementById('photoContainer');
+        var images = photoContainer.querySelectorAll('img');
+
+        images.forEach(function(image) {
+            var currentSize = image.clientWidth;
+            var id = image.parentElement.href;
+
+            if (!originalSizes[id]) {
+                storeOriginalSize(image);
+            }
+
+            if (action === 'increase' && currentSize * 2 <= originalSizes[id]) {
+                image.style.width = (currentSize * 2) + 'px'; 
+            } else if (action === 'decrease'  && currentSize / 2 >= originalSizes[id] / 8) {
+                image.style.width = (currentSize / 2) + 'px'; 
+            }
+        });
+    }
+    function resetSize() {
+        var photoContainer = document.getElementById('photoContainer');
+        var images = photoContainer.querySelectorAll('img');
+
+        images.forEach(function(image) {
+            var id = image.parentElement.href;
+            if (originalSizes[id]) {
+                image.style.width = originalSizes[id] + 'px';
+            }
+        });
+    }
+
+    function changeView(view) {
+        var photoContainer = document.getElementById('photoContainer');
+        if (view === 'list') {
+            photoContainer.classList.remove('flex-wrap');
+            photoContainer.classList.add('flex-column');
+        } else {
+            photoContainer.classList.remove('flex-column');
+            photoContainer.classList.add('flex-wrap');
+        }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var photoContainer = document.getElementById('photoContainer');
+        var images = photoContainer.querySelectorAll('img');
+
+        images.forEach(function(image) {
+            storeOriginalSize(image);
+        });
+    });
+</script>
+
+{% endif %}
+{% endblock body %}

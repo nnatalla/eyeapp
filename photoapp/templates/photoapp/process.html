@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+{% block body %}
+<div class="form-group mx-auto">
+    <h2 class="text-center">
+        Zamierzasz odseparować sieć naczyń krwionośnych z obrazu: <span class="text-success"><i>{{ photo }}</i></span><br />
+    </h2>
+    <p class="text-center">Potwierdź operację</p>
+    <div class="form-group">
+        <form action=""
+              method="post"
+              class="d-flex flex-column align-items-center justify-content-center">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <a href="{{ request.META.HTTP_REFERER|default:'/default-url/' }}" class="btn btn-primary">Anuluj</a>
+                </div>
+                <div class="col">
+                    <a href="{% url 'photo:processed' photo.id %}" class="btn btn-success">Wykonaj</a>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;"></div>
+            <p>Po naciśnięciu przycisku pojawi się przeprocesowany obraz.</p>
+            <p>Obraz jest przypisany do oryginalnego obrazu w bazie.</p>
+            <p style="">Operacja może potrwać do kilku minut<span class="text-danger">, w zależności od rozmiaru obrazu</span>.</p>
+            <p>Zachowaj cierpliwość.</p>
+        </form>
+    </div>
+    <div style="margin-bottom: 100px;"></div>
+</div>
+
+{% endblock body %}

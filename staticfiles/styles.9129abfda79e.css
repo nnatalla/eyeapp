@@ -1,0 +1,130 @@
+body {
+    background-color: darkolivegreen;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("tlo1.3551c7eb86a5.png"); /* background-blend-mode:;*/
+    background-attachment: fixed; /* T?o strony nie b?dzie si? przesuwa? podczas przewijania */
+    padding-bottom: 150px;
+}
+
+header {
+    background-color: #363636;
+    padding: 10px 0;
+    font-size: 20px;
+    color: #333;
+}
+
+
+footer {
+    background-color: #363636;
+    font-size: 12px;
+    color: white;
+    position: center;
+  
+}
+
+/* Dodane style dla tekstu i listy kluczowych cech */
+.welcome-text {
+    font-size: 2em;
+    font-weight: bold;
+    color: green;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 222);
+    text-align: center; /* Wy�rodkowanie tekstu */
+}
+
+.feature-list {
+    list-style-type: disc; 
+    padding-left: 2%; /* U�yj jednostki procentowe */
+    display: flex;
+    flex-direction: column;
+    align-items: left; /* Wy�rodkowanie listy na �rodku i wyr�wnanie tekstu do lewej */
+    text-align: left; /* Wyr�wnanie tekstu wewn�trz element�w listy do lewej */
+}
+
+.feature-list li {
+    margin-bottom: 1%; /* U�yj jednostki procentowe */
+    position: relative;
+}
+
+.feature-list li::before {
+    color: #00ff00;
+    font-size: 1.5em;
+    position: absolute;
+    left: -2%; /* U�yj jednostki procentowe */
+}
+
+.content-text {
+    font-weight: bold;
+    color: white;
+}
+
+.content nav a {
+    background-color: rgba(169, 169, 169, 0.5);
+    margin: 0 10px; /* Dodatkowy margines mi�dzy odsy�aczami */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+    .content nav a:hover {
+        background-color: rgba(169, 169, 169, 0.8);
+    }
+
+/* Dodane style CSS dla odsy�aczy do pozycji */
+.content nav a {
+    background-color: rgba(169, 169, 169, 0.5);
+    margin: 0 10px; /* Dodatkowy margines mi�dzy odsy�aczami */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    width: auto; /* Szeroko�� dostosowana do zawarto�ci */
+}
+
+    .content nav a:hover {
+        background-color: rgba(169, 169, 169, 0.8);
+    }
+
+/* Dodane style CSS dla tabeli i kluczowych cech */
+.table {
+    background-color: rgba(0, 128, 0, 0.6); /* Zielone t�o tabeli na 50% */
+    color: white; /* Kolor tekstu w tabeli */
+    width: fit-content;
+    margin: 0 auto; /* Wy�rodkowanie tabeli */
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px; /* Dodatkowy margines mi�dzy tabel� a tre�ci� pod ni� */
+}
+
+    .table th,
+    .table td {
+        color: white; /* Kolor tekstu w nag��wkach i kom�rkach tabeli */
+    }
+
+.feature-list {
+    list-style: none;
+    padding-left: 0;
+    background-color: rgba(211, 211, 211, 0.5); /* Bia�e przezroczyste t�o dla kluczowych cech */
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Dodane style CSS dla stopki */
+.footer-text {
+    color: white;
+    text-decoration: none;
+}
+
+/* Inne istniej�ce style pozostaj� niezmienione */
+
+
+.last {
+    list-style: none;
+    padding-left: 0;
+    background-color: rgba(221, 211, 211, 0.5); /* Bia�e przezroczyste t�o dla kluczowych cech */
+    border-radius: 10px;
+    padding: 15px;
+    font-weight: bold;
+    color: darkgreen;
+}

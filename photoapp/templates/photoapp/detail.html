@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center text-success">{{ photo.title }}</h1>
+    <p class="text-center fw-light">
+        Utworzono: <span class="fw-bold">{{photo.created}}</span> <br>
+        Przez użytkownika: <span class="fw-bold">{{photo.submitter.username}}</span>
+    </p>
+    <p class="text-center">
+        {% if user == photo.submitter %}
+            <span><a href="{% url 'photo:update' photo.id %}" class="text-primary px-2">Uaktualnij</a></span>
+        {% endif %}
+        <span><a href="{% url 'photo:process' photo.id %}" class="text-primary px-2">Procesuj</a></span>
+        {% if user == photo.submitter %}
+            <span><a href="{% url 'photo:delete' photo.id %}" class="text-danger px-2">Usuń</a></span>
+        {% endif %}
+    </p>
+</div>
+
+<div class="row justify-content-start pb-2">
+    <div class="col-md-2">
+        <p>
+            <h4 class="text-black fw-bold">Menu edycji:</h4>
+            {% if photo.processed_image %}
+            <button class="btn btn-primary" data-toggle="modal" data-target="#imageModal">Pokaż obrazy razem</button> <br><br>
+            {% else %}
+            <button class="btn btn-primary" data-toggle="modal" data-target="#imageModalno">Pokaż obrazy razem</button> <br><br>
+            {% endif %}
+
+            {% if photo.processed_image %}
+            <button class= "btn btn-outline-primary" onclick="resizeImages('{{ photo.image.url }}', '{{ photo.processed_image.url }}', '400', '400')">Pomniejsz widok obrazów</button> <br><br>
+            {% else %}
+            <button class="btn btn-outline-primary" onclick="resizeImage('{{ photo.image.url }}', '400', '400')">Pomniejsz widok obrazów</button> <br><br>
+
+            {% endif %}
+
+        </p>
+    </div>
+
+    <div class="col-md-8">
+        <img src="{{photo.image.url}}" alt="" width="100%" data-lightbox="main-image" data-title="{{photo.title}}" />
+        <div style="margin-bottom: 10px;"></div>
+        {% if photo.processed_image %}
+            <div>
+                <h4 class="text-black fw-bold">Przeprocesowany obraz</h4>
+            </div>
+            <img src="{{ photo.processed_image.url }}" alt="Processed {{ photo.title }}" width="600px" data-lightbox="processed-image" data-title="Processed {{ photo.title }}" />
+        {% else %}
+            <p class="text-center p-1 mb-1 bg-secondary text-white">To zdjęcie nie zostało jeszcze przetworzone.</p>
+        {% endif %}
+    </div>
+    <div class="col-md-2">
+        <h4 class="text-black fw-bold">Informacje</h4>
+        <h5>Tagi:</h5>
+        <ul class="list-group list-group-horizontal-lg list-unstyled py-4">
+            {% for tag in photo.tags.all %}
+            <li><a href="{% url 'photo:tag' tag.slug %}" class="btn btn-sm list-group-item list-group-item-primary">{{tag.name}}</a></li>
+            {% endfor %}
+        </ul>
+        <h5>Opis:</h5>
+        <p>{{ photo.description }}</p>
+    </div>
+    <div style="margin-bottom: 100px;"></div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Zestawienie dwóch obrazów</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ photo.image.url }}" alt="" class="img-fluid" />
+                    </div>
+                    <div class="col-md-6">
+                        {% if photo.processed_image %}
+                            <img src="{{ photo.processed_image.url }}" alt="Processed {{ photo.title }}" class="img-fluid" />
+                        {% else %}
+                            <p class="text-center p-1 mb-1 bg-secondary text-white">To zdjęcie nie zostało jeszcze przetworzone.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="imageModalno" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Zestawienie dwóch obrazów</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ photo.image.url }}" alt="" class="img-fluid" />
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                        {% if photo.processed_image %}
+                            <img src="{{ photo.processed_image.url }}" alt="Processed {{ photo.title }}" class="img-fluid" />
+                        {% else %}
+                            <div class="text-center p-5 mb-1 bg-danger text-white">Brak przeprocesowanego obrazu</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function resizeImages(originalUrl, processedUrl, width, height) {
+        resizeImage(originalUrl, width, height);
+        resizeImage(processedUrl, width, height);
+    }
+    function resizeImage(imageUrl, width, height) {
+
+        var imgElement = document.querySelector('[src="' + imageUrl + '"]');
+        imgElement.width = width;
+        imgElement.height = height;
+    }
+</script>
+
+{% endblock body %}

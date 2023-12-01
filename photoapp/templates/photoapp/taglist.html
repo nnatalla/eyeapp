@@ -1,0 +1,11 @@
+{% extends 'photoapp/list.html' %}
+
+{% block body %}
+
+<div class="alert alert-primary">
+    <h2 class="text-center">Zdjęcia z tagiem: {{tag}}</h2>
+</div>
+
+{{ block.super }}
+
+{% endblock body %}

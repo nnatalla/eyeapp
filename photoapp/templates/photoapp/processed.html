@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+{% block body %}
+<div class="form-group mx-auto">
+    <h2 class="text-center">
+        Oto oseparowana sieć naczyń ze zdjęcia: <span class="text-success"><i>{{ photo }}</i></span>
+    </h2>
+
+        <p class="text-center">
+            <span><a href="{% url 'photo:all' %}" class="text-primary px-2">Wszystkie zdjęcia</a></span>
+            <span><a href="{% url 'photo:mine' %}" class="text-success px-2">Moje zdjęcia</a></span>
+            <span><a href="{% url 'photo:list' %}" class="text-primary px-2">Strona wyszukiwania</a></span>
+        </p>
+        <div style="margin-bottom: 30px;"></div>
+
+        <img src="{{photo.processed_image.url}}" alt="" style="max-width: 100%;" />
+
+    <div style="margin-bottom: 100px;"></div>
+</div>
+
+</div>
+
+{% endblock body %}

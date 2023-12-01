@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+
+<div style="margin-bottom: 20px;"></div>
+<p class="text-center fw-bold">Wszystkie obrazy dna oka znajdujące się w bazie:</p>
+<div class="d-flex flex-wrap">
+    {% for photo in photos %}
+    <div class="col-lg-3 col-md-4 col-xs-6 flex-fill">
+        <a href="{% url 'photo:detail' photo.id %}" class="d-block mb-4 h-100">
+            <p class="text-center text-success fw-bold">ID: {{ photo.id }} | Nazwa: {{ photo.title }}</p>
+            <img src="{{photo.image.url}}" class="img-fluid rounded" alt="{{photo.title}}" />
+
+            {% if photo.processed_image %}
+            <img src="{{photo.processed_image.url}}" class="img-fluid rounded" alt="{{photo.title}}" />
+            {% else %}
+            {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<div style="margin-bottom: 100px;"></div>
+</div>
+{% endif %}
+{% endblock body %}

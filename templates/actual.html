@@ -1,0 +1,50 @@
+{% extends 'baseIN.html' %}
+
+{% block head %}
+    <meta charset="UTF-8">
+{% endblock %}
+
+{% block body %}
+<div class="content text-center">
+    <h2 class="text-success text-center">Aktualności</h2>
+    <div style="margin-bottom: 20px;"></div>
+
+    {% if user.groups.all.0.name == 'add_processed' %}
+        <a href="{% url 'photo:addnews' %}" class="btn btn-sm btn-success custom-signout-btn">Dodaj nową aktualność</a>
+    {% endif %}
+    <div style="margin-bottom: 20px;"></div>
+
+    <form method="get">
+        <label for="num_to_display" style="color: white">Wybierz ilość wyświetlanych rekordów:</label>
+        <select name="num_to_display" style="width: auto" id="num_to_display">
+            {% for option in display_options %}
+                <option value="{{ option }}" {% if option == selected_num %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="date_filter" style="color: white">Wybierz ilość dni:</label>
+        <select name="date_filter" style="width: auto" id="date_filter">
+            {% for option in date_filter_options %}
+            <option value="{{ option }}" {% if option == selected_date_filter %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+        </select>
+
+        <button type="submit">Wyświetl</button>
+    </form>
+
+    <div style="margin-bottom: 10px;"></div>
+
+    {% for news in latest_news %}
+        <div class="news-item" style="background-color: #ffffff; padding: 10px; margin-bottom: 20px;">
+            <h3>{{ news.title }}</h3>
+            <p>{{ news.content }}</p>
+            <p>Data publikacji: {{ news.date_published }}</p>
+        </div>
+    {% endfor %}
+
+    {% if not latest_news %}
+        <p class="last">Brak aktualności.</p>
+    {% endif %}
+</div>
+<div style="margin-bottom: 100px;"></div>
+{% endblock body %}

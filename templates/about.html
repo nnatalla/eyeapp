@@ -1,0 +1,116 @@
+{% extends 'baseIN.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="content text-center">
+
+    <div class="content text-center">
+        <h2 class="last" style="color:rgb(0, 0, 0)">Opis techniczny systemu</h2>
+<div style="margin-bottom: 50px;"></div>
+    <nav class="mb-4">
+        <a href="#position1" class="list-group-item list-group-item-action">Funkcje systemu</a>
+        <a href="#position2" class="list-group-item list-group-item-action">Wykorzystane technologie</a>
+        <a href="#position3" class="list-group-item list-group-item-action">Bazy danych</a>
+    </nav>
+
+    <div style="margin-bottom: 100px;"></div>
+
+    <div id="position1">
+        <h2 class="content-text">Kluczowe funkcje udostępniane przez system:</h2>
+        <ul class="feature-list">
+            <li class="content-text">
+                Logowanie użytkowników
+            </li>
+            <li class="content-text">
+                Dodanie zdjęcia obrazu dna oka
+            </li>
+            <li class="content-text">
+                Uaktualnienie danych dotyczących obrazu
+            </li>
+            <li class="content-text">
+                Dodanie przeprocesowanego obrazu dna oka z dysku (uprzywilejowani użytkownicy)
+            </li>
+            <li class="content-text">
+                Przeprocesowanie oryginalnego obrazu w celu odesparowania sieci naczyń krwionośnych
+            </li>
+            <li class="content-text">
+                Uaktualnienie danych zdjęcia (użytkownik będący właścicielem)
+            </li>
+            <li class="content-text">
+                Usunięcie zdjęcia (użytkownik będący właścicielem)
+            </li>
+            <li class="content-text">
+                Dodanie aktualności (uprawnieni użytkownicy)
+            </li>
+            <li class="content-text">
+                Wyszukanie obrazu po odpowiednich filtrach
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="table-responsive" id="position2">
+        <div style="margin-top: 100px;"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Bootstrap</th>
+                    <th>Css</th>
+                    <th>Html</th>
+                    <th>Python</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Zastosowanie</td>
+                    <td>Wiersz 1</td>
+                    <td>Wiersz 1</td>
+                    <td>Wiersz 1</td>
+                    <td>Wiersz 1</td>
+                </tr>
+                <tr>
+                    <td>Wersja</td>
+                    <td>Wiersz 2</td>
+                    <td>Wiersz 2</td>
+                    <td>Wiersz 2</td>
+                    <td>3.9</td>
+                </tr>
+                <tr>
+                    <td>% udziału w projekcie</td>
+                    <td>Wiersz 3, Kolumna 1</td>
+                    <td>Wiersz 3, Kolumna 2</td>
+                    <td>Wiersz 3, Kolumna 3</td>
+                    <td>Wiersz 1, Kolumna 3</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-bottom: 100px;"></div>
+
+    <div id="position3" class="context-text">
+        <div class="last">
+        <p style=" max-width: 500px; margin: 0 auto;">W projekcie wykorzystałam bazę danych do przechowywania plików AWS S3, zaś 
+            do przechowywania pozostałych danych wykorzystałam bazę Postgres na platformie Neon. 
+        </p>
+    </div>
+    <div style="margin-bottom: 20px;"></div>
+
+
+        {% load static %}
+        <img src="{% static 'db.jpg' %}" alt="Medical Image"  class="baner img-fluid">
+
+    </div>
+    <div style="margin-bottom: 100px;"></div>
+
+</div>
+</div>
+
+    {% endblock body %}

@@ -1,0 +1,29 @@
+{% extends 'baseIN.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="mx-auto">
+        <h2 class="p-3 mb-2 text-success text-center">Dodaj nową aktualność</h2>
+</div>
+<div class="form-group">
+    <div class="news">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.title|as_crispy_field }}
+        {{ form.content|as_crispy_field }}
+
+        <div style="margin-bottom: 15px;"></div>
+        <button type="submit" class="btn btn-outline-success">Dodaj aktualność</button>
+        <div style="margin-bottom: 15px;"></div>
+    </form>
+    <a href="{% url 'user:actual' %}">Powrót do listy aktualności</a>
+</div>
+</div>
+    <div style="margin-bottom: 100px;"></div>
+</div>
+{% endblock body %}

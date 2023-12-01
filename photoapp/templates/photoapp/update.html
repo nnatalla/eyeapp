@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="mx-auto">
+  <h1 class="mt-3 text-center">Uaktualnianie obrazu  <span class="text-success">{{photo}}</span></h1>
+</div>
+<div class="form-group">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.title|as_crispy_field }}
+        {{ form.description|as_crispy_field }}
+        {{ form.tags|as_crispy_field }}
+
+        {% if user.groups.all.0.name == 'add_processed' %}
+        {{ form.processed_image|as_crispy_field }}
+        {% endif %}
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <button type="submit" class="btn btn-success mb-3">Uaktualnij</button> <br>
+        <a href="{{ request.META.HTTP_REFERER|default:'/default-url/' }}" class="btn btn-primary">Powrót</a>
+      </form>
+    <div style="margin-bottom: 100px;"></div>
+</div>
+{% endblock body %}

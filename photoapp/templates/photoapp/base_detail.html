@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<meta charset="UTF-8">
+{% endblock %}
+
+
+{% block body %}
+<div class="mx-auto">
+    <h1 class="text-center text-success">{{ photo.title }}</h1>
+    <p class="text-center fw-light">
+        Utworzono: <span class="fw-bold">{{photo.created}}</span> <br>
+        Przez użytkownika: <span class="fw-bold">{{photo.submitter.username}}</span>
+    </p>
+    <p class="text-center">
+
+    {% if user == photo.submitter %}
+        <span><a href="{% url 'photo:update' photo.id %}" class="text-primary px-2">Uaktualnij</a></span>
+
+        {% endif %}
+        <span><a href="{% url 'photo:process' photo.id %}" class="text-primary px-2">Procesuj</a></span>
+        {% if user == photo.submitter %}
+        <span><a href="{% url 'photo:delete' photo.id %}" class="text-danger px-2">Usuń</a></span>
+    </p>
+    {% endif %}
+</div>
+<div class="row pb-5">
+    <div class="col-md-8">
+        <img src="{{photo.image.url}}" alt="" width="100%" />
+    </div>
+    <div class="col-md-4">
+        <h2>Informacje</h2>
+        <h5>Tagi:</h5>
+        <ul class="list-group list-group-horizontal-lg list-unstyled py-4">
+            {% for tag in photo.tags.all %}
+            <li><a href="{% url 'photo:tag' tag.slug %}" class="btn btn-sm list-group-item list-group-item-primary">{{tag.name}}</a></li>
+            {% endfor %}
+
+        </ul>
+        <h5>Opis:</h5>
+        <p>{{ photo.description }}</p>
+    </div>
+    <div style="margin-bottom: 100px;"></div>
+</div>
+
+{% endblock body %}
